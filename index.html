@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A browser-first Tetris practice project with keyboard and touch controls.">
+  <title>Neon Stack Tetris</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero">
+      <p class="eyebrow">Browser-first practice project</p>
+      <h1>Neon Stack Tetris</h1>
+      <p class="intro">
+        A single-player Tetris clone built with plain HTML, CSS, and JavaScript.
+        It is ready for desktop keyboards, mobile touch controls, and static hosting.
+      </p>
+    </section>
+
+    <section class="game-layout">
+      <div class="board-panel">
+        <div class="board-frame">
+          <canvas id="game-board" aria-label="Tetris board" role="img"></canvas>
+
+          <div class="board-overlay" id="board-overlay" hidden>
+            <p class="overlay-title" id="overlay-title">Paused</p>
+            <p class="overlay-copy" id="overlay-copy">Take a breath, then jump back in.</p>
+            <button class="primary-button" id="overlay-button" type="button">Resume</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="info-panel">
+        <div class="status-card">
+          <span class="status-label">Status</span>
+          <strong class="status-value" id="status-value">Running</strong>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <span class="stat-label">Score</span>
+            <strong class="stat-value" id="score-value">0</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Best</span>
+            <strong class="stat-value" id="best-score-value">0</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Lines</span>
+            <strong class="stat-value" id="lines-value">0</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Level</span>
+            <strong class="stat-value" id="level-value">1</strong>
+          </article>
+        </div>
+
+        <article class="panel-card">
+          <div class="panel-heading">
+            <h2>Next Piece</h2>
+            <p>Preview updates before every new spawn.</p>
+          </div>
+
+          <div class="preview-grid" id="next-preview" aria-label="Next piece preview">
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+            <span class="preview-cell" data-preview-cell></span>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-heading">
+            <h2>Keyboard</h2>
+            <p>Desktop shortcuts mirror the touch controls.</p>
+          </div>
+
+          <ul class="control-list">
+            <li><span>Move</span><strong>Left / Right</strong></li>
+            <li><span>Rotate</span><strong>Up or X</strong></li>
+            <li><span>Soft Drop</span><strong>Down</strong></li>
+            <li><span>Hard Drop</span><strong>Space</strong></li>
+            <li><span>Pause</span><strong>P</strong></li>
+            <li><span>Restart</span><strong>R</strong></li>
+          </ul>
+        </article>
+
+        <div class="action-row">
+          <button class="secondary-button" id="pause-button" type="button">Pause</button>
+          <button class="primary-button" id="restart-button" type="button">Restart</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="touch-controls" aria-label="Touch controls">
+      <button class="touch-button" data-action="moveLeft" type="button" aria-label="Move left">Left</button>
+      <button class="touch-button" data-action="rotateClockwise" type="button" aria-label="Rotate clockwise">Rotate</button>
+      <button class="touch-button" data-action="moveRight" type="button" aria-label="Move right">Right</button>
+      <button class="touch-button touch-button--hold" data-action="softDrop" type="button" aria-label="Soft drop while pressed">Down</button>
+      <button class="touch-button touch-button--accent" data-action="hardDrop" type="button" aria-label="Hard drop">Drop</button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

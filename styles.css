@@ -1,0 +1,457 @@
+:root {
+  --ink-950: #06111c;
+  --ink-900: #0b1c2b;
+  --ink-800: #12283c;
+  --panel: rgba(10, 24, 39, 0.88);
+  --panel-strong: rgba(8, 20, 34, 0.96);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --text-main: #f4f7fb;
+  --text-soft: #c3d3e6;
+  --accent-coral: #ff7f51;
+  --accent-gold: #ffd166;
+  --accent-mint: #5eead4;
+  --accent-blue: #6cb8ff;
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 14px 30px rgba(0, 0, 0, 0.24);
+  --content-width: min(1100px, calc(100vw - 2rem));
+  --touch-gap: 0.8rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at top left, rgba(255, 127, 81, 0.26), transparent 28rem),
+    radial-gradient(circle at top right, rgba(94, 234, 212, 0.2), transparent 24rem),
+    linear-gradient(145deg, #07111a 0%, #0d2131 46%, #091521 100%);
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto;
+  z-index: -1;
+  border-radius: 999px;
+  filter: blur(40px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+body::before {
+  width: 18rem;
+  height: 18rem;
+  top: 10%;
+  left: -4rem;
+  background: rgba(255, 209, 102, 0.24);
+}
+
+body::after {
+  width: 20rem;
+  height: 20rem;
+  right: -6rem;
+  bottom: 12%;
+  background: rgba(108, 184, 255, 0.22);
+}
+
+.app-shell {
+  width: var(--content-width);
+  margin: 0 auto;
+  padding: 2.5rem 0 3rem;
+}
+
+.hero {
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  color: var(--accent-gold);
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  letter-spacing: 0.04em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.intro {
+  max-width: 42rem;
+  margin: 1rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text-soft);
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22rem;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.panel-card,
+.status-card,
+.stat-card,
+.board-frame {
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+}
+
+.board-frame {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 25%),
+    linear-gradient(155deg, rgba(255, 127, 81, 0.12), rgba(0, 0, 0, 0) 42%),
+    var(--panel-strong);
+  border-radius: 1.75rem;
+  padding: 1.1rem;
+  overflow: hidden;
+}
+
+.board-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 1.2rem 1.2rem;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent);
+  pointer-events: none;
+}
+
+#game-board {
+  display: block;
+  width: min(100%, 26rem);
+  aspect-ratio: 1 / 2;
+  margin: 0 auto;
+  border-radius: 1.1rem;
+  background: linear-gradient(180deg, #07111a 0%, #081521 100%);
+}
+
+.board-overlay {
+  position: absolute;
+  inset: 1.1rem;
+  display: grid;
+  place-items: center;
+  gap: 0.85rem;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 1.1rem;
+  background: rgba(4, 11, 18, 0.76);
+  backdrop-filter: blur(12px);
+}
+
+.board-overlay[hidden] {
+  display: none;
+}
+
+.overlay-title {
+  margin: 0;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(2rem, 7vw, 3rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.overlay-copy {
+  margin: 0;
+  max-width: 20rem;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+.info-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.status-card,
+.panel-card,
+.stat-card {
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  border-radius: 1.35rem;
+}
+
+.status-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.15rem;
+}
+
+.status-label,
+.stat-label,
+.panel-heading p,
+.control-list span {
+  color: var(--text-soft);
+}
+
+.status-value {
+  color: var(--accent-mint);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.stat-card {
+  padding: 1rem 1.1rem;
+}
+
+.stat-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  font-size: 1.7rem;
+}
+
+.panel-card {
+  padding: 1.15rem;
+}
+
+.panel-heading {
+  margin-bottom: 1rem;
+}
+
+.panel-heading h2 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.panel-heading p {
+  margin: 0.4rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  max-width: 12rem;
+}
+
+.preview-cell {
+  aspect-ratio: 1 / 1;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+  transition: transform 140ms ease, background-color 140ms ease;
+}
+
+.preview-cell[data-filled="true"] {
+  transform: translateY(-0.08rem);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
+    var(--preview-color, var(--accent-blue));
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.control-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.control-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.94rem;
+}
+
+.control-list strong {
+  color: var(--accent-gold);
+}
+
+.action-row {
+  display: flex;
+  gap: 0.8rem;
+}
+
+button {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.primary-button,
+.secondary-button,
+.touch-button {
+  border-radius: 999px;
+  padding: 0.9rem 1.1rem;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease,
+    color 140ms ease;
+  touch-action: manipulation;
+}
+
+.primary-button,
+.touch-button--accent {
+  background: linear-gradient(135deg, #ff8d5b, #ff6a3d);
+  color: #fffaf5;
+  box-shadow: 0 12px 26px rgba(255, 106, 61, 0.35);
+}
+
+.secondary-button,
+.touch-button:not(.touch-button--accent) {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  border: 1px solid var(--line-strong);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.touch-button:hover {
+  transform: translateY(-1px);
+}
+
+.primary-button:active,
+.secondary-button:active,
+.touch-button:active,
+.touch-button.is-active {
+  transform: translateY(1px) scale(0.985);
+}
+
+.touch-controls {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--touch-gap);
+  margin-top: 1.5rem;
+}
+
+.touch-button {
+  min-height: 3.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.touch-button--hold {
+  color: var(--accent-mint);
+}
+
+.touch-button--accent {
+  border: none;
+}
+
+@media (max-width: 960px) {
+  .app-shell {
+    padding-top: 1.75rem;
+  }
+
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .info-panel {
+    order: 2;
+  }
+
+  .touch-controls {
+    position: fixed;
+    left: 50%;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    width: min(calc(100vw - 1rem), 35rem);
+    padding: 0.75rem;
+    margin-top: 0;
+    transform: translateX(-50%);
+    z-index: 20;
+    border: 1px solid var(--line);
+    border-radius: 1.4rem;
+    background: rgba(7, 17, 26, 0.88);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+  }
+
+  body {
+    padding-bottom: 8.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: min(calc(100vw - 1rem), 40rem);
+  }
+
+  .hero {
+    margin-bottom: 1.4rem;
+  }
+
+  .intro {
+    font-size: 0.97rem;
+  }
+
+  .board-frame {
+    padding: 0.8rem;
+    border-radius: 1.25rem;
+  }
+
+  .board-overlay {
+    inset: 0.8rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .action-row {
+    flex-direction: column;
+  }
+
+  .touch-controls {
+    gap: 0.55rem;
+    padding: 0.7rem;
+  }
+
+  .touch-button {
+    min-height: 3.25rem;
+    padding-inline: 0.4rem;
+    font-size: 0.82rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
