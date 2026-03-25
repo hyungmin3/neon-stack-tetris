@@ -370,6 +370,16 @@ button {
   border: none;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .keyboard-card {
+    display: none;
+  }
+
+  .intro {
+    display: none;
+  }
+}
+
 @media (max-width: 960px) {
   .app-shell {
     width: min(calc(100vw - 0.9rem), 42rem);
