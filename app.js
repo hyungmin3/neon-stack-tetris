@@ -4,7 +4,7 @@
   const PREVIEW_GRID_SIZE = 4;
   const BASE_DROP_INTERVAL = 1000;
   const MIN_DROP_INTERVAL = 140;
-  const SOFT_DROP_INTERVAL = 55;
+  const SOFT_DROP_INTERVAL = 120;
   const STORAGE_KEY = "neon-stack-best-score";
   const LINE_SCORES = [0, 100, 300, 500, 800];
 
@@ -374,6 +374,20 @@
     state.inputQueue.push(action);
   }
 
+  function startSoftDrop() {
+    if (state.softDropHeld || state.isPaused || state.isGameOver) {
+      return;
+    }
+
+    state.softDropHeld = true;
+    gravityAccumulator = 0;
+    enqueueAction("softDrop");
+  }
+
+  function stopSoftDrop() {
+    state.softDropHeld = false;
+  }
+
   function togglePause() {
     if (state.isGameOver) {
       return;
@@ -726,10 +740,7 @@
         }
         break;
       case "ArrowDown":
-        if (!state.softDropHeld) {
-          enqueueAction("softDrop");
-        }
-        state.softDropHeld = true;
+        startSoftDrop();
         break;
       case "Space":
         if (!event.repeat) {
@@ -753,7 +764,7 @@
 
   function handleKeyUp(event) {
     if (event.code === "ArrowDown") {
-      state.softDropHeld = false;
+      stopSoftDrop();
     }
   }
 
@@ -763,7 +774,7 @@
 
       if (action === "softDrop") {
         const releaseSoftDrop = () => {
-          state.softDropHeld = false;
+          stopSoftDrop();
           button.classList.remove("is-active");
         };
 
@@ -774,8 +785,7 @@
             return;
           }
 
-          state.softDropHeld = true;
-          enqueueAction("softDrop");
+          startSoftDrop();
           button.classList.add("is-active");
         });
 
@@ -816,7 +826,7 @@
     document.addEventListener("keyup", handleKeyUp);
 
     window.addEventListener("blur", () => {
-      state.softDropHeld = false;
+      stopSoftDrop();
 
       if (!state.isGameOver) {
         state.isPaused = true;
