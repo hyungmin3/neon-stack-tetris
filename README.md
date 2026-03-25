@@ -1,24 +1,47 @@
 # Neon Stack Tetris
 
-A browser-first Tetris practice project built with plain HTML, CSS, and JavaScript.
+A browser-first Tetris practice project built with Vite, vanilla JavaScript, ESLint, and Prettier.
 
-## Files
+## Project structure
 
-- `index.html`: app structure and UI panels
-- `styles.css`: responsive layout, mobile touch controls, and visual styling
-- `app.js`: game loop, Tetris logic, keyboard input, touch input, and localStorage high score
+- `index.html`: Vite entry HTML
+- `src/main.js`: game loop, input, rendering, and localStorage logic
+- `src/styles.css`: responsive layout, touch controls, and visual styling
+- `public/.nojekyll`: copied into the build output for GitHub Pages
+- `.github/workflows/deploy-pages.yml`: build and deploy workflow for GitHub Pages
 
 ## Run locally
 
-You can open `index.html` directly in a browser.
-
-If you prefer a local web server and have Python installed:
+Install dependencies:
 
 ```bash
-python -m http.server 8000
+npm install
 ```
 
-Then open `http://localhost:8000`.
+Start the dev server:
+
+```bash
+npm run dev
+```
+
+Build the production bundle:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+Lint and format:
+
+```bash
+npm run lint
+npm run format
+```
 
 ## Controls
 
@@ -51,13 +74,13 @@ This repository includes a GitHub Actions workflow for Pages deployment.
 5. Wait for the `Deploy static content to Pages` workflow to finish.
 6. Open the published Pages URL.
 
-Because this project is plain static HTML, CSS, and JavaScript, no build step is required.
+The workflow installs dependencies, builds the app with Vite, and uploads `dist/`.
 
 ## Deploy to Cloudflare Pages
 
 1. Create a new Pages project and connect your repository.
-2. Set the build command to empty.
-3. Set the output directory to `/`.
+2. Set the build command to `npm run build`.
+3. Set the output directory to `dist`.
 4. Deploy the repository as a static site.
 
 This project does not need an API server for the current single-player version.

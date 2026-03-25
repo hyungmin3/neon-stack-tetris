@@ -1,3 +1,5 @@
+import "./styles.css";
+
 (() => {
   const BOARD_WIDTH = 10;
   const BOARD_HEIGHT = 20;
@@ -15,7 +17,7 @@
     S: "#7bd88f",
     Z: "#ff6b6b",
     J: "#6cb8ff",
-    L: "#ff9f43"
+    L: "#ff9f43",
   };
 
   const TETROMINOS = {
@@ -23,37 +25,37 @@
       [0, 0, 0, 0],
       [1, 1, 1, 1],
       [0, 0, 0, 0],
-      [0, 0, 0, 0]
+      [0, 0, 0, 0],
     ],
     O: [
       [1, 1],
-      [1, 1]
+      [1, 1],
     ],
     T: [
       [0, 1, 0],
       [1, 1, 1],
-      [0, 0, 0]
+      [0, 0, 0],
     ],
     S: [
       [0, 1, 1],
       [1, 1, 0],
-      [0, 0, 0]
+      [0, 0, 0],
     ],
     Z: [
       [1, 1, 0],
       [0, 1, 1],
-      [0, 0, 0]
+      [0, 0, 0],
     ],
     J: [
       [1, 0, 0],
       [1, 1, 1],
-      [0, 0, 0]
+      [0, 0, 0],
     ],
     L: [
       [0, 0, 1],
       [1, 1, 1],
-      [0, 0, 0]
-    ]
+      [0, 0, 0],
+    ],
   };
 
   const canvas = document.getElementById("game-board");
@@ -83,7 +85,7 @@
     isPaused: false,
     isGameOver: false,
     softDropHeld: false,
-    inputQueue: []
+    inputQueue: [],
   };
 
   let bag = [];
@@ -99,9 +101,7 @@
   }
 
   function rotateMatrix(matrix) {
-    return matrix[0].map((_, columnIndex) =>
-      matrix.map((row) => row[columnIndex]).reverse()
-    );
+    return matrix[0].map((_, columnIndex) => matrix.map((row) => row[columnIndex]).reverse());
   }
 
   function getTopPadding(matrix) {
@@ -145,7 +145,7 @@
       rotation: 0,
       matrix,
       x: Math.floor((BOARD_WIDTH - matrix[0].length) / 2),
-      y: -getTopPadding(matrix)
+      y: -getTopPadding(matrix),
     };
   }
 
@@ -605,7 +605,7 @@
       cellWidth,
       cellHeight,
       COLORS[state.activePiece.type],
-      0.22
+      0.22,
     );
   }
 
@@ -693,7 +693,10 @@
   function updateTouchButtonState() {
     touchButtons.forEach((button) => {
       if (button.dataset.action === "softDrop") {
-        button.classList.toggle("is-active", state.softDropHeld && !state.isPaused && !state.isGameOver);
+        button.classList.toggle(
+          "is-active",
+          state.softDropHeld && !state.isPaused && !state.isGameOver,
+        );
       }
     });
   }
@@ -719,7 +722,7 @@
       "Space",
       "KeyP",
       "KeyR",
-      "KeyX"
+      "KeyX",
     ];
 
     if (blockedCodes.includes(event.code)) {
