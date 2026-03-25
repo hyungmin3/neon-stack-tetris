@@ -372,77 +372,258 @@ button {
 
 @media (max-width: 960px) {
   .app-shell {
-    padding-top: 1.75rem;
+    width: min(calc(100vw - 0.9rem), 42rem);
+    padding-top: 1rem;
+    padding-bottom: 1.35rem;
+  }
+
+  .hero {
+    margin-bottom: 0.9rem;
+  }
+
+  .eyebrow {
+    margin-bottom: 0.35rem;
+    font-size: 0.68rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.95rem, 9vw, 3rem);
+  }
+
+  .intro {
+    display: none;
   }
 
   .game-layout {
     grid-template-columns: 1fr;
+    gap: 0.8rem;
   }
 
   .info-panel {
-    order: 2;
+    order: -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+
+  .status-card,
+  .stats-grid {
+    grid-column: 1 / -1;
+  }
+
+  .status-card {
+    padding: 0.8rem 0.95rem;
+  }
+
+  .stats-grid {
+    gap: 0.55rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .stat-card {
+    padding: 0.75rem 0.45rem;
+    text-align: center;
+  }
+
+  .stat-label {
+    margin-bottom: 0.28rem;
+    font-size: 0.72rem;
+  }
+
+  .stat-value {
+    font-size: 1.15rem;
+  }
+
+  .next-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 0.95rem;
+  }
+
+  .next-card .panel-heading {
+    margin-bottom: 0;
+  }
+
+  .next-card .panel-heading p {
+    display: none;
+  }
+
+  .next-card .preview-grid {
+    max-width: 6.8rem;
+    gap: 0.32rem;
+  }
+
+  .keyboard-card {
+    display: none;
+  }
+
+  .action-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+    align-self: stretch;
+  }
+
+  .board-frame {
+    padding: 0.8rem;
+    border-radius: 1.3rem;
+  }
+
+  #game-board {
+    width: min(100%, calc((100svh - 19.5rem) / 2));
   }
 
   .touch-controls {
     position: fixed;
     left: 50%;
-    bottom: max(1rem, env(safe-area-inset-bottom));
-    width: min(calc(100vw - 1rem), 35rem);
-    padding: 0.75rem;
+    right: auto;
+    bottom: max(0.65rem, env(safe-area-inset-bottom));
+    width: min(calc(100vw - 0.75rem), 35rem);
+    padding: 0.65rem;
     margin-top: 0;
     transform: translateX(-50%);
     z-index: 20;
     border: 1px solid var(--line);
-    border-radius: 1.4rem;
+    border-radius: 1.15rem;
     background: rgba(7, 17, 26, 0.88);
     box-shadow: var(--shadow-lg);
     backdrop-filter: blur(10px);
   }
 
   body {
-    padding-bottom: 8.5rem;
+    padding-bottom: 6.9rem;
   }
 }
 
 @media (max-width: 640px) {
   .app-shell {
-    width: min(calc(100vw - 1rem), 40rem);
+    width: min(calc(100vw - 0.7rem), 40rem);
   }
 
   .hero {
-    margin-bottom: 1.4rem;
-  }
-
-  .intro {
-    font-size: 0.97rem;
+    margin-bottom: 0.7rem;
   }
 
   .board-frame {
-    padding: 0.8rem;
-    border-radius: 1.25rem;
+    padding: 0.65rem;
+    border-radius: 1.1rem;
   }
 
   .board-overlay {
-    inset: 0.8rem;
+    inset: 0.65rem;
+    padding: 1.3rem 1rem;
+  }
+
+  .status-card {
+    padding: 0.72rem 0.8rem;
+  }
+
+  .status-label,
+  .status-value {
+    font-size: 0.86rem;
+  }
+
+  .stats-grid {
+    gap: 0.45rem;
+  }
+
+  .stat-card {
+    padding: 0.68rem 0.35rem;
+  }
+
+  .stat-value {
+    font-size: 1.02rem;
+  }
+
+  .next-card {
+    padding: 0.72rem 0.8rem;
+    gap: 0.6rem;
+  }
+
+  .next-card .panel-heading h2 {
+    font-size: 0.88rem;
+  }
+
+  .next-card .preview-grid {
+    max-width: 5.9rem;
+    gap: 0.28rem;
+  }
+
+  .action-row {
+    gap: 0.45rem;
+  }
+
+  .primary-button,
+  .secondary-button {
+    padding: 0.78rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  #game-board {
+    width: min(100%, calc((100svh - 18.5rem) / 2));
+  }
+
+  .touch-controls {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "left rotate right"
+      "down down drop";
+    gap: 0.45rem;
+    padding: 0.58rem;
+  }
+
+  .touch-button {
+    min-height: 3rem;
+    padding-inline: 0.45rem;
+    font-size: 0.78rem;
+  }
+
+  .touch-button[data-action="moveLeft"] {
+    grid-area: left;
+  }
+
+  .touch-button[data-action="rotateClockwise"] {
+    grid-area: rotate;
+  }
+
+  .touch-button[data-action="moveRight"] {
+    grid-area: right;
+  }
+
+  .touch-button[data-action="softDrop"] {
+    grid-area: down;
+  }
+
+  .touch-button[data-action="hardDrop"] {
+    grid-area: drop;
+  }
+
+  body {
+    padding-bottom: 8.8rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero h1 {
+    font-size: 1.75rem;
   }
 
   .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .next-card,
   .action-row {
-    flex-direction: column;
+    grid-column: 1 / -1;
   }
 
-  .touch-controls {
-    gap: 0.55rem;
-    padding: 0.7rem;
+  .action-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .touch-button {
-    min-height: 3.25rem;
-    padding-inline: 0.4rem;
-    font-size: 0.82rem;
+  #game-board {
+    width: min(100%, calc((100svh - 20.5rem) / 2));
   }
 }
 
